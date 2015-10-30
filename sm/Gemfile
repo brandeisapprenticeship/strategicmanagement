@@ -3,6 +3,12 @@ source 'https://rubygems.org'
 #does user authentication 
 gem 'devise'
 
+gem 'mysql2'
+
+gem 'ahoy_matey' #datagathering 
+
+gem 'activeuuid', '>=0.5.0' #format for datagathering 
+
 #################
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
