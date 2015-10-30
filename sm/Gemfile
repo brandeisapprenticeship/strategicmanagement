@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #does user authentication 
 gem 'devise'
 
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 
 gem 'ahoy_matey' #datagathering 
 
