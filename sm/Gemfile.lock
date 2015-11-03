@@ -181,11 +181,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
-<<<<<<< HEAD
-  mysql2
-=======
   mysql2 (~> 0.3.18)
->>>>>>> db
   rails (= 4.2.4)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
