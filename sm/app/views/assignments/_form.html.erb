@@ -11,7 +11,18 @@
     </div>
   <% end %>
 
-  <div class="actions">
+  <p>
+    <%= f.label :discussion_title %><br>
+    <%= f.text_field :discussion_title %>
+  </p>
+ 
+  <p>
+    <%= f.label :discussion_question %><br>
+    <%= f.text_field :discussion_question %>
+  </p>
+
+  <p>
     <%= f.submit %>
-  </div>
+  </p>
 <% end %>
+

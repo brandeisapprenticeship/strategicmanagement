@@ -39,22 +39,10 @@ GEM
     activeuuid (0.6.1)
       activerecord (>= 3.1)
       uuidtools
-    addressable (2.3.8)
-    ahoy_matey (1.2.1)
-      addressable
-      browser (>= 0.4.0)
-      errbase
-      geocoder
-      rails
-      referer-parser (>= 0.3.0)
-      request_store
-      user_agent_parser
-      uuidtools
     arel (6.0.3)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    browser (1.0.1)
     builder (3.2.2)
     byebug (6.0.2)
     coffee-rails (4.1.0)
@@ -72,10 +60,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    errbase (0.0.3)
     erubis (2.7.0)
     execjs (2.6.0)
-    geocoder (1.2.12)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -128,8 +114,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
-    referer-parser (0.3.0)
-    request_store (1.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     sass (3.4.19)
@@ -160,7 +144,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    user_agent_parser (2.3.0)
     uuidtools (2.1.5)
     warden (1.2.3)
       rack (>= 1.0)
@@ -175,7 +158,6 @@ PLATFORMS
 
 DEPENDENCIES
   activeuuid (>= 0.5.0)
-  ahoy_matey
   byebug
   coffee-rails (~> 4.1.0)
   devise
