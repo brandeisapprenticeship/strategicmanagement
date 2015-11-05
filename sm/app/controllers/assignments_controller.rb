@@ -68,12 +68,9 @@ class AssignmentsController < ApplicationController
       @assignment = Assignment.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def assignment_params
-<<<<<<< HEAD
-      params[:assignment].permit(:discussion_title, :due_date, :discussion_question, :edit_question)
-=======
       params.require(:assignment).permit(:discussion_title, :due_date, :discussion_question, :edit_question)
->>>>>>> database
+
     end
 end
