@@ -18,8 +18,6 @@ ActiveRecord::Schema.define(version: 20151030140124) do
     t.datetime "due_date"
     t.string   "discussion_question", limit: 255
     t.string   "edit_question",       limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
   end
 
   create_table "users", force: :cascade do |t|
