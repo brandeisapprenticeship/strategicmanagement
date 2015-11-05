@@ -71,6 +71,5 @@ class AssignmentsController < ApplicationController
 
     def assignment_params
       params.require(:assignment).permit(:discussion_title, :due_date, :discussion_question, :edit_question)
-
     end
 end
