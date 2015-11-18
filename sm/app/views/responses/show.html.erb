@@ -1,0 +1,10 @@
+<h1><%=@response.title%></h1>
+<h3>By: <%=@response.user.name%></h3>
+<br>
+<div class="responsecontent">
+	<%=@response.content.html_safe%>
+</div>
+<br>
+
+<%= link_to 'Back', {:controller => 'assignments', :action => 'responselist', :id => @response.assignment.id}%>
+

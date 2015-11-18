@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="contents.css">
+
+<% if !responses.nil? && responses.assignment.final_due < Time.zone.now %>
+<h1> The due date has passed, you can no longer edit thisresponses. </h1>
+<h1><%=responses.title%></h1>
+<h3>By: <%=responses.user.name%></h3>
+<br>
+<div class="responsescontent">
+  <%=responses.content.html_safe%>
+</div>
+
+<% else %>
+
+<%= form_for(responses) do |f| %>
+  <% if responses.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(responses.errors.count, "error") %> prohibited this responses from being saved:</h2>
+
+      <ul>
+      <% responses.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
+    <%= f.label :title, "Headline" %><br>
+    <%= f.text_field :title%>
+  </div>
+  </div>
+
+  <div class="field">
+     <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
+    <%= f.hidden_field :assignment_id, value: @assignment.id%>
+  </div>
+  </div>
+
+  <div class="field">
+     <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
+    <%= f.label :content %><br>
+    <%= f.cktext_area :content, :ckeditor => {:language => 'en'} %>
+  </div>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, value: @user.id%>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_name, value: @user.name%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<% end %>

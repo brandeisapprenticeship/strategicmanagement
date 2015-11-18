@@ -13,6 +13,15 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
   end
 
+   def postlist
+    @assignment = Assignment.find(params[:id])
+    if sort_column.nil?
+      @posts = Post.where(assignment_id: @assignment.id).order("user_name" + " " + "asc")
+    else
+      @posts = Post.where(assignment_id: @assignment.id).order(sort_column + " " + sort_direction)
+    end
+  end
+
   # GET /assignments/new
   def new
     @assignment = Assignment.new
