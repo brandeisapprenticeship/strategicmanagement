@@ -1,3 +1,5 @@
+<% if current_user.admin? %> 
+
 <%= form_for(@assignment) do |f| %>
   <% if @assignment.errors.any? %>
     <div id="error_explanation">
@@ -26,3 +28,6 @@
   </p>
 <% end %>
 
+<% else %> 
+  <h1> Only Admins can view this page </h1> 
+<% end %> 
