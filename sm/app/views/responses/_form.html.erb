@@ -1,23 +1,21 @@
-<link rel="stylesheet" href="contents.css">
-
-<% if !responses.nil? && responses.assignment.final_due < Time.zone.now %>
+<% if !@response.nil? && @response.assignment.due_date< Time.zone.now %>
 <h1> The due date has passed, you can no longer edit this response. </h1>
-<h1><%=response.title%></h1>
-<h3>By: <%=response.user.name%></h3>
+<h1><%=@response.title%></h1>
+<h3>By: <%=@response.user.name%></h3>
 <br>
-<div class="responsescontent">
-  <%=responses.content.html_safe%>
+<div class="responsecontent">
+  <%=@response.content.html_safe%>
 </div>
 
 <% else %>
 
-<%= form_for(responses) do |f| %>
-  <% if responses.errors.any? %>
+<%= form_for(@response) do |f| %>
+  <% if @response.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(responses.errors.count, "error") %> prohibited this responses from being saved:</h2>
+      <h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
 
       <ul>
-      <% responses.errors.full_messages.each do |message| %>
+      <% @response.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

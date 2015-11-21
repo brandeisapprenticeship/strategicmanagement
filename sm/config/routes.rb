@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get 'responses/userlist'
+  get 'assignments/responselist'
+  mount Ckeditor::Engine => '/ckeditor'
   resources :responses
   resources :presentations
-  get 'home/index'
-
   resources :assignments
   devise_for :views
   devise_for :users

@@ -73,7 +73,7 @@ class AssignmentsController < ApplicationController
   end
 
   def sort_column
-    Post.where(assignment_id: @assignment.id).column_names.include?(params[:sort]) ? params[:sort] : "user_name"
+    Response.where(assignment_id: @assignment.id).column_names.include?(params[:sort]) ? params[:sort] : "user_name"
   end
   
   def sort_direction
