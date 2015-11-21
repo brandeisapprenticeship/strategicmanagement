@@ -1,5 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /assignments
   # GET /assignments.json
@@ -13,12 +14,12 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
   end
 
-   def postlist
+  def responselist
     @assignment = Assignment.find(params[:id])
     if sort_column.nil?
-      @posts = Post.where(assignment_id: @assignment.id).order("user_name" + " " + "asc")
+      @response = Response.where(assignment_id: @assignment.id).order("user_name" + " " + "asc")
     else
-      @posts = Post.where(assignment_id: @assignment.id).order(sort_column + " " + sort_direction)
+      @response = Response.where(assignment_id: @assignment.id).order(sort_column + " " + sort_direction)
     end
   end
 
@@ -69,6 +70,14 @@ class AssignmentsController < ApplicationController
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def sort_column
+    Post.where(assignment_id: @assignment.id).column_names.include?(params[:sort]) ? params[:sort] : "user_name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   private

@@ -5,7 +5,7 @@ class ResponsesController < ApplicationController
   # GET /responses.json
   def index
     @user = User.find(params[:user_id])
-    @responses = Post.where(user_id: @user.id).order(assignment_id: :asc)
+    @responses = Response.where(user_id: @user.id).order(assignment_id: :asc)
   end
 
   # GET /responses/1
@@ -19,9 +19,8 @@ class ResponsesController < ApplicationController
 
   # GET /responses/new
   def new
-    @response = Response.new
     @assignment = Assignment.find(params[:assignment_id])
-    @responses = Post.new(assignment_id: @assignment.id)
+    @response = Response.new(assignment_id: @assignment.id)
     @user = current_user
   end
 

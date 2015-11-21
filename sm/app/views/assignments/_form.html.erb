@@ -13,19 +13,25 @@
     </div>
   <% end %>
 
-  <p>
+  <div class="field">
     <%= f.label :discussion_title %><br>
-    <%= f.text_field :discussion_title %>
-  </p>
- 
-  <p>
-    <%= f.label :discussion_question %><br>
-    <%= f.text_field :discussion_question %>
-  </p>
+    <%= f.text_area :discussion_title%>
+  </div>
 
-  <p>
+  <div class="field">
+    <%= f.label :discussion_question %><br>
+    <%= f.cktext_area :discussion_question, :ckeditor => {:language => 'en'}%>
+  </div>
+
+  <div class="field">
+    <%= f.label :due_date %><br>
+    <%= f.datetime_select :due_date %>
+  </div>
+
+  <div class="actions">
     <%= f.submit %>
-  </p>
+  </div>
+
 <% end %>
 
 <% else %> 
