@@ -13,21 +13,27 @@
     </div>
   <% end %>
 
-  <p>
-    <%= f.label :discussion_title %><br>
-    <%= f.text_field :discussion_title %>
-  </p>
- 
-  <p>
-    <%= f.label :discussion_question %><br>
-    <%= f.text_field :discussion_question %>
-  </p>
+  <div class="field">
+    <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
+    <%= f.label :title %><br>
+    <%= f.text_field :title%>
+  </div>
+  </div>
 
-  <p>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.cktext_area :description, :ckeditor => {:language => 'en'} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :due_date %><br>
+    <%= f.datetime_select :due_date%>
+  </div>
+
+  <div class="actions">
     <%= f.submit %>
-  </p>
+  </div>
 <% end %>
 
-<% else %> 
-  <h1> Only Admins can view this page </h1> 
-<% end %> 
+<%= else %>
+  <p> This is only for Admins 
