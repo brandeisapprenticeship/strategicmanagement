@@ -69,6 +69,6 @@ class PresentationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def presentation_params
-      params[:presentation]
+      params.require(:presentation).permit(:slides)
     end
 end
