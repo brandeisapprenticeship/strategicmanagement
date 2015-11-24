@@ -3,6 +3,7 @@ class CreatePresentations < ActiveRecord::Migration
     create_table :presentations do |t|
 
       t.timestamps null: false
+      t.string :title
     end
   end
 end
