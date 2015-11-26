@@ -21,15 +21,11 @@ ActiveRecord::Schema.define(version: 20151121213612) do
   end
 
   create_table "presentations", force: :cascade do |t|
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "powerpoint_file_name",    limit: 255
-    t.string   "powerpoint_content_type", limit: 255
-    t.integer  "powerpoint_file_size",    limit: 4
-    t.datetime "powerpoint_updated_at"
-    t.string   "slides_file_name",        limit: 255
-    t.string   "slides_content_type",     limit: 255
-    t.integer  "slides_file_size",        limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "slides_file_name",    limit: 255
+    t.string   "slides_content_type", limit: 255
+    t.integer  "slides_file_size",    limit: 4
     t.datetime "slides_updated_at"
   end
 

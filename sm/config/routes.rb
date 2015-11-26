@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   devise_for :views
   devise_for :users
 
-  #root 'assignments#index'
   root 'home#index'
   get 'home/about'
   get 'home/assignments'
