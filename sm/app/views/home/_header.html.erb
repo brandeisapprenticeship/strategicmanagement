@@ -10,14 +10,15 @@ toggle =" collapse" data-target ="# bs-example-navbar-collapse-1" >
 <span class =" icon-bar" > </span >  
 <span class =" icon-bar" > </span >  
 </button > 
-<a class =" navbar-brand" href ="#" > Strategic Management </a >
+<a class=" navbar-brand" href ="#" > Strategic Management </a >
 </div >
 <!-- Collect the nav links, forms, and other content for toggling --> 
 <div class =" collapse navbar-collapse" id =" bs-example-navbar-collapse-1" >
 <ul class =" nav navbar-nav navbar-right" >
 <li > <%= link_to 'Home', root_path, class: 'btn btn-default' %> </li >
-<li > <%= link_to 'About Us', home_about_path, class: 'btn btn-default' %> </li >
-
+<li > <%= link_to 'About This Class', home_about_path, class: 'btn btn-default' %> </li >
+<li > <%= link_to 'Assignments', assignments_path, class: 'btn btn-default'  %> </li >
+<li > <%= link_to 'Presentations', presentations_path, class: 'btn btn-default'  %> </li >
 <li > <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: 'btn btn-default' %> </li >
 </li > 
 </ul > 
