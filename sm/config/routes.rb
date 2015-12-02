@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   get 'assignments/responselist'
   mount Ckeditor::Engine => '/ckeditor'
   resources :responses
-  resources :presentations
+  resources :presentations do
+    collection do 
+      get 'list'
+    end
+  end
   resources :assignments
   devise_for :views
   devise_for :users
@@ -11,6 +15,7 @@ Rails.application.routes.draw do
   root 'assignments#index'
   get 'home/about'
   get 'home/assignments'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

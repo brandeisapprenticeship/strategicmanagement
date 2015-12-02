@@ -36,6 +36,8 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
+    
+    @presentation = @assignment.presentation
   end
 
   # POST /assignments

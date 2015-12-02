@@ -5,12 +5,12 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1>Assignments List</h1>
+<h1>Discussion Questions </h1>
   
     <table class="table">
       <thead>
         <tr>
-          <th>Title</th>
+          <th>Question</th>
           <th>Due Date</th>
           <%if !current_user.admin?%>
             <th>My Response</th>
@@ -55,8 +55,8 @@
 
 
 <% if current_user.admin?%>
-  <li > <%= link_to 'Create New Assignment', new_assignment_path, class: 'btn btn-info'  %> </li >
+  <li > <%= link_to 'Add New Discussion Question', new_assignment_path, class: 'btn btn-info'  %> </li >
   <p></p> 
-  <li > <%= link_to 'Add New Presentations', presentations_path, class: 'btn btn-info'  %> </li >
+  <li > <%= link_to 'Upload New Presentation and Create New Discussion Thread ', presentations_path, class: 'btn btn-info'  %> </li >
 <%end%>
 

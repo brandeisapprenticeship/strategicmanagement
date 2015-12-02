@@ -13,6 +13,10 @@ class PresentationsController < ApplicationController
   def show
   end
 
+  def list 
+    @presentations = Presentation.all
+  end 
+
   # GET /presentations/new
   def new
     @presentation = Presentation.new
