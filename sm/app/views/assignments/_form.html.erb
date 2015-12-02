@@ -1,6 +1,11 @@
 <% if current_user.admin? %> 
 
 <%= form_for(@assignment) do |f| %>
+
+   <% unless @presentation.nil? %> 
+        <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="400" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+      <% end %>
+
   <% if @assignment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
@@ -26,6 +31,12 @@
   <div class="field">
     <%= f.label :due_date %><br>
     <%= f.datetime_select :due_date %>
+  </div>
+
+    <div class="field">
+     <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
+    <%= f.hidden_field :presentation_id, value: @presentation.id%>
+  </div>
   </div>
 
   <div class="actions">

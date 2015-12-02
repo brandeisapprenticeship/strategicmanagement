@@ -6,47 +6,53 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Assignments List</h1>
-
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Due Date</th>
-      <%if !current_user.admin?%>
-        <th>My Response</th>
-      <%end%>
-        <th>Class Responses</th>
-      <%if current_user.admin?%>
-        <th>Edit Assignment</th>
-      <%end%>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @assignments.each do |assignment| %>
-      <tr>
-        <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= assignment.discussion_title %></td>
-        <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= assignment.due_date.strftime("%-b %-d at %I:%M%p") %></td>
-        <%if !current_user.admin?%>
-        <% if assignment.due_date < Time.zone.now %>
-        <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">Due date has passed</td>
-          <%elsif Response.where(user_id: current_user.id, assignment_id: assignment.id).exists?%>
-            <%@response = Response.where(user_id: current_user.id, assignment_id: assignment.id).first%>
-            <td><%=link_to "Edit/Continue Assignment", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}%></td>
-          <%else%>
-            <td><%= link_to "Start Assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}%></td>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Due Date</th>
+          <%if !current_user.admin?%>
+            <th>My Response</th>
           <%end%>
-        <%end%>
-        <td><%=link_to "See Responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
-        <%if current_user.admin?%>
-          <td><%= link_to 'Edit', edit_assignment_path(assignment.id) %></td>
-        <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <th>Class Responses</th>
+          <%if current_user.admin?%>
+            <th>Edit Assignment</th>
+          <%end%>
+        </tr>
+      </thead>
 
+      <tbody>
+        <% @assignments.each do |assignment| %>
+          <tr>
+            <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= assignment.discussion_title %></td>
+            <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= assignment.due_date.strftime("%-b %-d at %I:%M%p") %></td>
+            <%if !current_user.admin?%>
+            <% if assignment.due_date < Time.zone.now %>
+            <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">Due date has passed</td>
+              <%elsif Response.where(user_id: current_user.id, assignment_id: assignment.id).exists?%>
+                <%@response = Response.where(user_id: current_user.id, assignment_id: assignment.id).first%>
+                <td><%=link_to "Edit/Continue Assignment", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}%></td>
+              <%else%>
+                <td><%= link_to "Start Assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}%></td>
+              <%end%>
+            <%end%>
+            <td><%=link_to "See Responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
+            <%if current_user.admin?%>
+              <td><%= link_to 'Edit', edit_assignment_path(assignment.id) %></td>
+            <%end%>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+      <% unless @presentation.nil? %> 
+        <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="400" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+      <% end %>
+ 
 <br>
+ 
+
 
 <% if current_user.admin?%>
   <li > <%= link_to 'Create New Assignment', new_assignment_path, class: 'btn btn-info'  %> </li >

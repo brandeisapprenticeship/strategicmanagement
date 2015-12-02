@@ -18,11 +18,13 @@ ActiveRecord::Schema.define(version: 20151121213612) do
     t.datetime "due_date"
     t.string   "discussion_question", limit: 255
     t.string   "edit_question",       limit: 255
+    t.integer  "presentation_id",     limit: 4
   end
 
   create_table "presentations", force: :cascade do |t|
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "title",               limit: 255
     t.string   "slides_file_name",    limit: 255
     t.string   "slides_content_type", limit: 255
     t.integer  "slides_file_size",    limit: 4

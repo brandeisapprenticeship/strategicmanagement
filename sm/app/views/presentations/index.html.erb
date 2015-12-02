@@ -3,6 +3,9 @@
 
 <h1>Listing Presentations</h1>
 
+<%= link_to 'New Presentation', new_presentation_path %> 
+
+<h2> Current Presentation </h2> 
 <table>
   <thead>
     <tr>
@@ -11,16 +14,18 @@
   </thead>
 
   <tbody>
-    <% @presentations.each do |presentation| %>
       <tr>
-        <td><%= link_to 'Show', presentation %></td>
-        <td><%= link_to 'Edit', edit_presentation_path(presentation) %></td>
-        <td><%= link_to 'Destroy', presentation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+       <% unless @presentation.nil? %> 
+          <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          <td><%= link_to 'Edit', edit_presentation_path(@presentation) %></td>
+          <td><%= link_to 'Destroy', @presentation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %> 
       </tr>
-    <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Presentation', new_presentation_path %>
+
+

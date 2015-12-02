@@ -4,3 +4,4 @@
 
 <%= link_to 'Show', @assignment %> |
 <%= link_to 'Back', assignments_path %>
+<%= link_to 'Destroy', @assignment.destroy, :data =>  {:confirm => "Are you sure?" }%>

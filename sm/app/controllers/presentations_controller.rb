@@ -5,6 +5,7 @@ class PresentationsController < ApplicationController
   # GET /presentations.json
   def index
     @presentations = Presentation.all
+    @presentation = Presentation.all.order("created_at desc").first
   end
 
   # GET /presentations/1

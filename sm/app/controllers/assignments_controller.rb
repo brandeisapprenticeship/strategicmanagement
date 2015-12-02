@@ -5,7 +5,12 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
+    @presentation = Presentation.all.order("created_at desc").first
     @assignments = Assignment.all
+    unless @presentation.nil?
+      @assignments = Assignment.where(presentation_id: @presentation.id)
+    end
+
   end
 
   # GET /assignments/1
@@ -25,6 +30,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
+    @presentation = Presentation.all.order("created_at desc").first
     @assignment = Assignment.new
   end
 
@@ -36,6 +42,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = Assignment.new(assignment_params)
+    @presentation = Presentation.all.order("created_at desc").first
 
     respond_to do |format|
       if @assignment.save
@@ -88,6 +95,6 @@ class AssignmentsController < ApplicationController
 
 
     def assignment_params
-      params.require(:assignment).permit(:discussion_title, :due_date, :discussion_question, :edit_question)
+      params.require(:assignment).permit(:discussion_title, :due_date, :discussion_question, :edit_question, :presentation_id)
     end
 end
