@@ -10,7 +10,7 @@
     <tbody>
       <% @response.each do |response| %>
         <tr>
-          <td><%= link_to response.content.html_safe, response %></td>
+          <td><%= link_to response.content.lines.first.html_safe, response %></td>
           <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= response.user.name%></td>
           <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= time_ago_in_words(response.updated_at)%> ago</td>
         </tr>
