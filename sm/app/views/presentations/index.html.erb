@@ -1,11 +1,11 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Presentations</h1>
 
+<% if current_user.admin %>
 <%= link_to 'New Presentation', new_presentation_path %> 
 <%= link_to 'Show All Responses for the class', list_presentations_path %>
-
+<% end %>
 <h2> Current Presentation </h2> 
 <table>
   <thead>
@@ -19,8 +19,10 @@
 
        <% unless @presentation.nil? %> 
           <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          <% if current_user.admin %>
           <td><%= link_to 'Edit', edit_presentation_path(@presentation) %></td>
           <td><%= link_to 'Destroy', @presentation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         <% end %> 
       </tr>
   </tbody>

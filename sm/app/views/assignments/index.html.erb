@@ -39,7 +39,7 @@
             <%end%>
             <td><%=link_to "See Responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
             <%if current_user.admin?%>
-              <td><%= link_to 'Edit', edit_assignment_path(assignment.id) %></td>
+              <td><%= link_to 'Edit',  {:controller => 'assignments', :action => 'edit', :id => assignment.id} %></td>
             <%end%>
           </tr>
         <% end %>
