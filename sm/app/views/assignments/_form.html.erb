@@ -2,7 +2,7 @@
 <% if @presentation.nil? %>
 <h2>You must upload the presentation first.</h2>
 <% else %>
-<iframe src="<%= @presentation.slides.url %>" frameborder="0" width="400" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="<%= @presentation.slides.url %>" frameborder="0" width="550" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 <%= form_for(@assignment) do |f| %>
 
   <% if @assignment.errors.any? %>

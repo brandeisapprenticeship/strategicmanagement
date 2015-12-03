@@ -1,5 +1,6 @@
 <h1><%=@response.title%></h1>
 <h3>By: <%=@response.user.name%></h3>
+<h4>On: <%=@response.assignment.discussion_title %></h4>
 <br>
 <div class="responsecontent">
 	<%=@response.content.html_safe%>
