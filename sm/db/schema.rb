@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121213612) do
+ActiveRecord::Schema.define(version: 20151203143901) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "discussion_title",    limit: 255
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20151121213612) do
     t.string   "discussion_question", limit: 255
     t.string   "edit_question",       limit: 255
     t.integer  "presentation_id",     limit: 4
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "response_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "presentations", force: :cascade do |t|

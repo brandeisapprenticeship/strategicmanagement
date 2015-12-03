@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :likes
   get 'responses/userlist'
   get 'assignments/responselist'
   mount Ckeditor::Engine => '/ckeditor'
