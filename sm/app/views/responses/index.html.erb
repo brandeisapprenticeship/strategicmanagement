@@ -2,13 +2,6 @@
 
 <%@responses.each do |response|%>
   <div class="portfoliocontent">
-    <p>
-      <h2><%= assignment.title%></h2>
-    </p>
-
-    <p style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
-      For Assignment: <%= response.assignment.title%>
-    </p>
 
     <p style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
       <%=response.content.html_safe%>
@@ -19,5 +12,3 @@
 
 <%end%>
 <br>
-
-<%= link_to 'Back', {:controller => 'response', :action => 'userlist'} %>

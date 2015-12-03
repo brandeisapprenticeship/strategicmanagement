@@ -5,6 +5,8 @@ class ResponsesController < ApplicationController
   # GET /responses.json
   def index
     @user = User.find(params[:user_id])
+    @assignment = Assignment.where(user_id: @user.id).order(assignment_id: :asc)
+
     @responses = Response.where(user_id: @user.id).order(assignment_id: :asc)
   end
 
@@ -15,6 +17,7 @@ class ResponsesController < ApplicationController
 
   def userlist
     @users = User.where(admin: false).order(name: :asc)
+
   end
 
   # GET /responses/new
