@@ -6,7 +6,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Discussion Questions </h1>
-  
+<div class="row">
+<div class="col-md-6">   
     <table class="table">
       <thead>
         <tr>
@@ -45,11 +46,14 @@
         <% end %>
       </tbody>
     </table>
-  
+</div>  
+<div class="col-md-6">   
+
       <% unless @presentation.nil? %> 
         <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="400" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       <% end %>
- 
+ </div>
+</div>
 <br>
  
 
