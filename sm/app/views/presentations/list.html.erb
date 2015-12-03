@@ -11,7 +11,7 @@
 		    <tbody>
 		 		<% presentation.assignments.each do |assignment| %> 
 		 		<tr>
-		 			<h1>Responses for Assignment: <%=assignment.discussion_title%></h1>
+		 			<h3><%=assignment.discussion_title%> </h3> <h5><%= assignment.due_date %></h5>
 					<table class='table table-bordered'>
 					  <thead>
 					      <tr>
@@ -23,7 +23,7 @@
 					    <tbody>
 					      <% assignment.responses.each do |response| %>
 					        <tr>
-					          <td><%= link_to response.title, response %></td>
+					          <td><%= link_to response.content.html_safe, response %></td>
 					          <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= response.user.name%></td>
 					          <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= time_ago_in_words(response.updated_at)%> ago</td>
 					        </tr>

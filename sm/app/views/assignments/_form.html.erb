@@ -4,7 +4,7 @@
 
    <% unless @presentation.nil? %> 
         <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="400" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-      <% end %>
+    <% end %>
 
   <% if @assignment.errors.any? %>
     <div id="error_explanation">
