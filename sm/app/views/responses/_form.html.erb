@@ -9,6 +9,8 @@
 
 <% else %>
 
+<h1><%=@assignment.discussion_question.html_safe%></h1> 
+
 <%= form_for(@response) do |f| %>
   <% if @response.errors.any? %>
     <div id="error_explanation">
@@ -22,12 +24,10 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
-    <%= f.label :title, "Headline" %><br>
-    <%= f.text_field :title%>
-  </div>
-  </div>
+
+  <% unless @presentation.nil? %> 
+        <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="400" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+    <% end %>
 
   <div class="field">
      <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
