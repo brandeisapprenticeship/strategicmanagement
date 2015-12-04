@@ -41,6 +41,7 @@
             <td><%=link_to "See Responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
             <%if current_user.admin?%>
               <td><%= link_to 'Edit',  {:controller => 'assignments', :action => 'edit', :id => assignment.id} %></td>
+              <td><%= link_to 'Delete', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <%end%>
           </tr>
         <% end %>
