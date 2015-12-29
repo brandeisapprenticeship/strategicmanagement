@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'ckeditor'
+gem 'ckeditor', :git => 'https://github.com/galetahub/ckeditor.git'
 
 gem 'passenger'
 #does user authentication 
