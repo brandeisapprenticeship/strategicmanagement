@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="color.css.scss">
+
+
 <div class =" jumbotron" > 
   <h1 align="center", style="color:white">Welcome to HS 252B</h1> 
   <h2 align="center", style="color:white">Strategic Management</h2>
@@ -47,6 +50,11 @@
         <% end %>
       </tbody>
     </table>
+    <% if current_user.admin?%>
+  <li > <%= link_to 'Add New Discussion Question', new_assignment_path, class: 'btn btn-primary'  %> </li >
+  <p></p> 
+  <li > <%= link_to 'Upload New Presentation and Create New Discussion Thread ', presentations_path, class: 'btn btn-primary'  %> </li >
+<%end%>
 </div>  
 <div class="col-md-6">   
 
@@ -57,11 +65,4 @@
 </div>
 <br>
  
-
-
-<% if current_user.admin?%>
-  <li > <%= link_to 'Add New Discussion Question', new_assignment_path, class: 'btn btn-info'  %> </li >
-  <p></p> 
-  <li > <%= link_to 'Upload New Presentation and Create New Discussion Thread ', presentations_path, class: 'btn btn-info'  %> </li >
-<%end%>
 
