@@ -13,6 +13,10 @@ class ResponsesController < ApplicationController
   # GET /responses/1
   # GET /responses/1.json
   def show
+    @response = Response.find(params[:id])
+    unless @response.user.id == current_user.id
+      ahoy.track "Read Response", response_id: @response.id
+    end
   end
 
   def userlist
