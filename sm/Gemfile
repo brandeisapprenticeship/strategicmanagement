@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'ckeditor', :git => 'https://github.com/galetahub/ckeditor.git'
+gem 'ckeditor'
 
 gem 'passenger'
 #does user authentication 
@@ -8,7 +8,7 @@ gem 'devise'
 
 gem 'mysql2', '~> 0.3.18'
 
-##gem 'ahoy_matey' #datagathering 
+gem 'ahoy_matey' #datagathering 
 
 gem 'activeuuid', '>=0.5.0' #format for datagathering 
 

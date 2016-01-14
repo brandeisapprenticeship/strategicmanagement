@@ -12,6 +12,7 @@
 //
 //= require ckeditor/init
 //= require jquery
+//= require ahoy
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
