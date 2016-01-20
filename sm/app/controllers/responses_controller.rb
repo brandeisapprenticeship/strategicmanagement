@@ -36,6 +36,7 @@ class ResponsesController < ApplicationController
   def edit
     @user = current_user
     @assignment = Assignment.find(params[:assignment_id])
+     @presentation = Presentation.all.order("created_at desc").first
   end
 
   # POST /responses
