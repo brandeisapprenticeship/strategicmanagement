@@ -1,9 +1,6 @@
-<link rel="stylesheet" href="color.css.scss">
-
-
 <div class =" jumbotron" > 
-  <h1 align="center", style="color:white">Welcome to HS 252B</h1> 
-  <h2 align="center", style="color:white">Strategic Management</h2>
+  <h1>Welcome to HS 252B</h1> 
+  <h2>Strategic Management</h2>
 </div>
 
 <p id="notice"><%= notice %></p>
@@ -29,11 +26,11 @@
       <tbody>
         <% @assignments.each do |assignment| %>
           <tr>
-            <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= assignment.discussion_title %></td>
-            <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= assignment.due_date.strftime("%-b %-d at %I:%M%p") %></td>
+            <td><%= assignment.discussion_title %></td>
+            <td><%= assignment.due_date.strftime("%-b %-d at %I:%M%p") %></td>
             <%if !current_user.admin?%>
             <% if assignment.due_date < Time.zone.now %>
-            <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">Due date has passed</td>
+            <td>Due date has passed</td>
               <%elsif Response.where(user_id: current_user.id, assignment_id: assignment.id).exists?%>
                 <%@response = Response.where(user_id: current_user.id, assignment_id: assignment.id).first%>
                 <td><%=link_to "Edit/Continue Assignment", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}%></td>

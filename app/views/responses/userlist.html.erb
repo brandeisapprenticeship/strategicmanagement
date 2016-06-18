@@ -9,8 +9,8 @@
   	<tbody>
 	    <% @users.each do |user| %>
 	      <tr>
-	        <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= user.name %></td>
-	        <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= link_to "Go",  {:controller => 'responses', :action => 'index', :user_id => user.id}%></td>
+	        <td><%= user.name %></td>
+	        <td><%= link_to "Go",  {:controller => 'responses', :action => 'index', :user_id => user.id}%></td>
 	      </tr>
 	    <% end %>
   	</tbody>

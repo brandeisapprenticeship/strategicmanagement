@@ -30,13 +30,13 @@
     <% end %>
 
   <div class="field">
-     <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
+     <div>
     <%= f.hidden_field :assignment_id, value: @assignment.id%>
   </div>
   </div>
 
   <div class="field">
-     <div style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;">
+     <div>
     <%= f.label :content %><br>
     <%= f.cktext_area :content, :ckeditor => {:language => 'en'} %>
   </div>

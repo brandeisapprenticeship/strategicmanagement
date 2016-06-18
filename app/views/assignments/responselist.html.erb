@@ -11,8 +11,8 @@
       <% @response.each do |response| %>
         <tr>
           <td><%= link_to response.content.lines.first.html_safe, response %></td>
-          <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= response.user.name%></td>
-          <td style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif;"><%= time_ago_in_words(response.updated_at)%> ago</td>
+          <td><%= response.user.name%></td>
+          <td><%= time_ago_in_words(response.updated_at)%> ago</td>
         </tr>
       <% end %>
     </tbody>
