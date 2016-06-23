@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-6">
+      <% unless @presentation.nil? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Due Date</th>
+            <th colspan="<%= !current_user.admin? ? 2 : 3 %>">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @assignments.each do |assignment| %>
+            <tr>
+              <td><%= assignment.discussion_title %></td>
+              <td><%= assignment.due_date.strftime("%-b %-d at %I:%M%p") %></td>
+              <%if !current_user.admin?%>
+              <% if assignment.due_date < Time.zone.now %>
+              <td>Due date has passed</td>
+                <%elsif Response.where(user_id: current_user.id, assignment_id: assignment.id).exists?%>
+                  <%@response = Response.where(user_id: current_user.id, assignment_id: assignment.id).first%>
+                  <td><%=link_to "Edit/Continue Assignment", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}%></td>
+                <%else%>
+                  <td><%= link_to "Start Assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}%></td>
+                <%end%>
+              <%end%>
+              <td><%=link_to "See Responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
+              <%if current_user.admin?%>
+                <td><%= link_to 'Edit',  {:controller => 'assignments', :action => 'edit', :id => assignment.id} %></td>
+                <td><%= link_to 'Delete', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <%end%>
+            </tr>
+          <% end %>
+           <% if @assignments.empty? %>
+            <td colspan='5' class='text-center'><i>No discussions yet</i></td>
+          <% end %>
+          <% if current_user.admin?%>
+          <tr>
+            <td colspan='5'>
+              <p class='text-center'><a href='#' id='new_question'>New question...</a></p>
+              <%= form_for(@new_assignment) do |f| %>
+                <% if @new_assignment.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+
+                    <ul>
+                    <% @new_assignment.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+
+                <div class="field">
+                  <%= f.label :discussion_title %><br>
+                  <%= f.text_field :discussion_title%>
+                </div>
+
+                <div class="field">
+                  <%= f.label :discussion_question %><br>
+                  <%= f.cktext_area :discussion_question, :ckeditor => {:language => 'en'}%>
+                </div>
+
+                <div class="field">
+                  <%= f.label :due_date %><br>
+                  <%= f.datetime_select :due_date %>
+                </div>
+
+                  <div class="field">
+                  <%= f.hidden_field :presentation_id, value: @presentation.id %>
+                </div>
+
+
+                <div class="actions">
+                  <%= f.submit %>
+                  <a class='btn btn-link' id='cancel_new_question'>Cancel</a>
+                </div>
+
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+  </div> 
+  <% unless @presentation.nil? %>
+  <div class="col-md-6"> 
+      <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="550" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+   </div>
+   <% end %>
+  </div>
+
+ 
+<script type='text/javascript'>
+$(function(){
+  $('#new_assignment').hide();
+  $('#new_question').click(function(e){
+    e.preventDefault();
+    $(this).hide();
+    $('#new_assignment').show();
+  });
+  $('#cancel_new_question').click(function(e){
+    $('#new_question').show();
+    $('#new_assignment').hide();
+  });
+});
+</script>

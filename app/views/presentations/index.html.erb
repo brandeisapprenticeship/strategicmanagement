@@ -25,9 +25,17 @@
 		<% @presentations.each do |presentation| %>
 		<tr>
 
-			<td><%= presentation.title %></td>
-			<td> <%= link_to 'Download', presentation.slides.url, :download=>presentation.title+".pdf", :class=>'btn btn-success' %>
-			<%= link_to 'Discussions', presentation_path(presentation), class: 'btn btn-info' %>
+			<td>
+				<% if presentation == @presentations.first %>
+					<b>
+				<% end %>
+				<%= presentation.title %>
+				<% if presentation == @presentations.first %>
+					 (current presentation) </b>
+				<% end %>
+			</td>
+			<td> 
+			<%= link_to 'View presentation and discussions', presentation_path(presentation), class: 'btn btn-primary' %>
 			<% if current_user.admin %>
 			<%= link_to 'Edit', edit_presentation_path(presentation), class: 'btn btn-warning' %>
 			<%= link_to 'Delete', presentation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

@@ -47,7 +47,7 @@ class AssignmentsController < ApplicationController
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to assignments_path, notice: 'Question was successfully created.' }
+        format.html { redirect_to :back, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       else
         format.html { render :new }
@@ -75,7 +75,7 @@ class AssignmentsController < ApplicationController
   def destroy
     @assignment.destroy
     respond_to do |format|
-      format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Question was successfully deleted.' }
       format.json { head :no_content }
     end
   end
