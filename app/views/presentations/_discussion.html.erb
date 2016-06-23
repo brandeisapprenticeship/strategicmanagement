@@ -6,7 +6,7 @@
           <tr>
             <th>Question</th>
             <th>Due Date</th>
-            <th colspan="<%= !current_user.admin? ? 2 : 3 %>">Actions</th>
+            <th class='text-center' colspan="<%= !current_user.admin? ? 2 : 4 %>">Actions</th>
           </tr>
         </thead>
 
@@ -25,19 +25,20 @@
                   <td><%= link_to "Start Assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}%></td>
                 <%end%>
               <%end%>
-              <td><%=link_to "See Responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
+              <td><%=link_to "View responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
               <%if current_user.admin?%>
+                <td><%=link_to "Download responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id, :format=>:csv}%></td>
                 <td><%= link_to 'Edit',  {:controller => 'assignments', :action => 'edit', :id => assignment.id} %></td>
                 <td><%= link_to 'Delete', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               <%end%>
             </tr>
           <% end %>
            <% if @assignments.empty? %>
-            <td colspan='5' class='text-center'><i>No discussions yet</i></td>
+            <td colspan='6' class='text-center'><i>No discussions yet</i></td>
           <% end %>
           <% if current_user.admin?%>
           <tr>
-            <td colspan='5'>
+            <td colspan='6'>
               <p class='text-center'><a href='#' id='new_question'>New question...</a></p>
               <%= form_for(@new_assignment) do |f| %>
                 <% if @new_assignment.errors.any? %>

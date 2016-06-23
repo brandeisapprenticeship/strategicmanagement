@@ -20,12 +20,16 @@ class AssignmentsController < ApplicationController
   end
 
   def responselist
-    @assignment = Assignment.find(params[:id])
-    if sort_column.nil?
-      @response = Response.where(assignment_id: @assignment.id).order("user_name" + " " + "asc")
-    else
-      @response = Response.where(assignment_id: @assignment.id).order(sort_column + " " + sort_direction)
-    end
+      @assignment = Assignment.find(params[:id])
+      if sort_column.nil?
+        @response = Response.where(assignment_id: @assignment.id).order("user_name" + " " + "asc")
+      else
+        @response = Response.where(assignment_id: @assignment.id).order(sort_column + " " + sort_direction)
+      end
+      respond_to do |format|
+        format.html
+        format.csv {send_data @assignment.as_csv, :filename=>@assignment.discussion_title+".csv"}
+      end
   end
 
   # GET /assignments/new
