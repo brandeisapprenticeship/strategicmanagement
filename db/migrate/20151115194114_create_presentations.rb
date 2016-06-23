@@ -4,6 +4,7 @@ class CreatePresentations < ActiveRecord::Migration
 
       t.timestamps null: false
       t.string :title
+      t.attachment :slides
     end
   end
 end

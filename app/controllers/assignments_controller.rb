@@ -9,7 +9,7 @@ class AssignmentsController < ApplicationController
     unless @presentation.nil?
       @assignments = Assignment.where(presentation_id: @presentation.id)
     end
-    @new_assignment = Assignment.new
+    @assignment = Assignment.new
 
   end
 
@@ -100,6 +100,6 @@ class AssignmentsController < ApplicationController
 
 
     def assignment_params
-      params.require(:assignment).permit(:discussion_title, :due_date, :discussion_question, :edit_question, :presentation_id)
+      params.require(:assignment).permit(:discussion_title, :due_date, :discussion_question, :edit_question, :presentation_id, :slide_number)
     end
 end

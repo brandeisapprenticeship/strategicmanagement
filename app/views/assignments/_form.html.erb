@@ -2,47 +2,55 @@
 <% if @presentation.nil? %>
 <h2>You must upload the presentation first.</h2>
 <% else %>
-<iframe src="<%= @presentation.slides.url %>" frameborder="0" width="550" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
 <%= form_for(@assignment) do |f| %>
+                <% if @assignment.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
 
-  <% if @assignment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+                    <ul>
+                    <% @assignment.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
 
-      <ul>
-      <% @assignment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+                
 
-  <div class="field">
-    <%= f.label :discussion_title %><br>
-    <%= f.text_area :discussion_title%>
-  </div>
+                <div class="form-group">
+                  <%= f.label :discussion_title, class:'control-label' %>
+                  <%= f.text_field :discussion_title, class:'form-control'%>
+                </div>
 
-  <div class="field">
-    <%= f.label :discussion_question %><br>
-    <%= f.cktext_area :discussion_question, :ckeditor => {:language => 'en'}%>
-  </div>
+                <div class="form-group">
+                  <%= f.label :discussion_question, class:'control-label' %>
+                  <%= f.cktext_area :discussion_question, :ckeditor => {:language => 'en'}, class:'form-control'%>
+                </div>
 
-  <div class="field">
-    <%= f.label :due_date %><br>
-    <%= f.datetime_select :due_date %>
-  </div>
+                <div class="form-group">
+                  <%= f.label :slide_number, class:'control-label' %>
+                  <%= f.number_field :slide_number, class:'form-control' %>
+                </div>
 
-    <div class="field">
-    <%= f.hidden_field :presentation_id, value: @presentation.id %>
-  </div>
+                <div class="form-group">
+                  <%= f.label :due_date, class:'control-label' %>
+                  <%= f.datetime_select :due_date, class:'form-control' %>
+                </div>
+
+                
+                  <%= f.hidden_field :presentation_id, value: @presentation.id %>
+                
 
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+                <div class="form-group" id='controls'>
+                  <%= f.submit "Save", class: 'btn btn-primary' %>
+                </div>
+
+              <% end %>
 
 <% end %>
-<% end %>
+
 <% else %> 
   <h1> Only Admins can view this page </h1> 
 <% end %> 

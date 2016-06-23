@@ -11,7 +11,7 @@ class PresentationsController < ApplicationController
   # GET /presentations/1.json
   def show
     @assignments=Assignment.where(presentation_id: @presentation.id)
-    @new_assignment=Assignment.new
+    @assignment=Assignment.new
   end
 
   def list 

@@ -5,6 +5,7 @@ class CreateAssignments < ActiveRecord::Migration
     	t.datetime :due_date
     	t.string :discussion_question
     	t.string :edit_question
+    	t.integer :slide_number
     	t.integer :presentation_id
     end
   end
