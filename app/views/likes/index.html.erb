@@ -4,28 +4,31 @@
 <p id="notice"><%= notice %></p>
 
 
-
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Assignment</th>
-      <th>Author</th>
-      <th>Content</th>
-      <th>View post</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @likes.each do |like| %>
+<% if !@likes.empty? %>
+  <table class='table'>
+    <thead>
       <tr>
-        <td><%= like.response.assignment.discussion_title %></td>
-        <td><%= like.response.user.name %></td>
-        <td><div class='response'><%= like.response.content.html_safe %></div></td>
-        <td><%= link_to "View post", like.response %> </td>
+        <th>Assignment</th>
+        <th>Author</th>
+        <th>Content</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @likes.each do |like| %>
+        <tr>
+          <td><%= like.response.assignment.discussion_title %></td>
+          <td><%= like.response.user.name %></td>
+          <td style='max-width: 650px;'><div class='response'><%= like.response.content.html_safe %></div></td>
+          <td><p><%= link_to 'Unlike', like, method: :delete, class:'btn btn-sm btn-link' %></p> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+<p><i>You have not liked any posts yet</i></p>
+<% end %>
 
 <script type='text/javascript'>
 $(function(){

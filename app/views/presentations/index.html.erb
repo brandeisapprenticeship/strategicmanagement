@@ -1,15 +1,14 @@
 <div class='page-header'>
 	<h1>Presentations</h1>
+	<% if current_user.admin %>
+		<p><%= link_to 'New Presentation', new_presentation_path, class:'btn btn-primary' %></p>
+	<% end %>
 </div>
 
 <p id="notice"><%= notice %></p>
 
 
-<% if current_user.admin %>
-<%= link_to 'New Presentation', new_presentation_path %> <br>
-<br>
-<%= link_to 'Show All Responses for the class', list_presentations_path %>
-<% end %>
+
 
 
 
@@ -46,7 +45,3 @@
 	</tr>
 </tbody>
 </table>
-<br>
-
-
-
