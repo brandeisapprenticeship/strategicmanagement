@@ -6,10 +6,10 @@ class AssignmentsController < ApplicationController
   # GET /assignments.json
   def index
     @presentation = Presentation.all.order("created_at desc").first
-    @assignments = Assignment.all
     unless @presentation.nil?
       @assignments = Assignment.where(presentation_id: @presentation.id)
     end
+    @new_assignment = Assignment.new
 
   end
 
@@ -47,7 +47,7 @@ class AssignmentsController < ApplicationController
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to assignments_path, notice: 'Assignment was successfully created.' }
+        format.html { redirect_to assignments_path, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       else
         format.html { render :new }
