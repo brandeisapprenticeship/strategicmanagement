@@ -12,6 +12,12 @@
 
 			</div>
 			<div class='form-group'>
+				<%= f.label :class_name, "Class name", :class=>'control-label' %>
+
+				<%= f.text_field :class_name, :value => @class_name, :class=>'form-control' %>
+
+			</div>
+			<div class='form-group'>
 				<%= f.label :about_text, "&quot;About this class&quot; page text".html_safe, :class=>'control-label' %>
 
 				<%= f.cktext_area :about_text, :value => @about_text, :ckeditor => {:language => 'en'}%>

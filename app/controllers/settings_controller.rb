@@ -3,6 +3,7 @@ class SettingsController < ApplicationController
 	def show
 		@about_text=Setting.about_text
 		@site_title=Setting.site_title
+		@class_name=Setting.class_name
 
 	end
 
@@ -10,6 +11,7 @@ class SettingsController < ApplicationController
 		params.require(:settings)
 	    Setting.about_text=params[:settings][:about_text]
 	    Setting.site_title=params[:settings][:site_title]
+	    Setting.class_name=params[:settings][:class_name]
 	    redirect_to :show_settings, notice: "Settings saved"
 	end
 
