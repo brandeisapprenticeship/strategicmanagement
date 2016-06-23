@@ -5,7 +5,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
-    @presentation = Presentation.all.order("created_at desc").first
+    @presentation = Presentation.current
     unless @presentation.nil?
       @assignments = Assignment.where(presentation_id: @presentation.id)
     end
@@ -30,7 +30,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
-    @presentation = Presentation.all.order("created_at desc").first
+    @presentation = Presentation.current
     @assignment = Assignment.new
   end
 
@@ -43,7 +43,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = Assignment.new(assignment_params)
-    @presentation = Presentation.all.order("created_at desc").first
+    @presentation = Presentation.current
 
     respond_to do |format|
       if @assignment.save

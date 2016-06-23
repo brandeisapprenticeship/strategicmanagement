@@ -26,11 +26,11 @@
 		<tr>
 
 			<td>
-				<% if presentation == @presentations.first %>
+				<% if presentation == Presentation.current %>
 					<b>
 				<% end %>
 				<%= presentation.title %>
-				<% if presentation == @presentations.first %>
+				<% if presentation == Presentation.current %>
 					 (current presentation) </b>
 				<% end %>
 			</td>

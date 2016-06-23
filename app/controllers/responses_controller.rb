@@ -31,14 +31,14 @@ class ResponsesController < ApplicationController
     @assignment = Assignment.find(params[:assignment_id])
     @response = Response.new(assignment_id: @assignment.id)
     @user = current_user
-    @presentation = Presentation.all.order("created_at desc").first
+    @presentation = Presentation.current
   end
 
   # GET /responses/1/edit
   def edit
     @user = current_user
     @assignment = Assignment.find(params[:assignment_id])
-     @presentation = Presentation.all.order("created_at desc").first
+     @presentation = Presentation.current
   end
 
   # POST /responses
