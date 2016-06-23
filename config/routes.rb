@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   post 'settings', to:'settings#save', as: 'save_settings' 
   get 'settings', to:'settings#show', as: 'show_settings' 
 
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
