@@ -1,6 +1,9 @@
 <div class='page-header'>
 	<h1><%=@user.name%>'s Portfolio</h1>
-	<%= link_to 'Return to user list', responses_userlist_path%> 
+	<ol class='breadcrumb'>
+    <li><%= link_to "Portfolios", responses_userlist_path %></li>
+    <li class='active'><%= @user.name %></li>
+  </ol>
 </div>
 
 

@@ -1,10 +1,14 @@
 <div class='page-header'>
 	<h1><%= @presentation.title %></h1>
+	<ol class='breadcrumb'>
+		<li><%= link_to "Presentations", presentations_path %></li>
+		<li class='active'><%= @presentation.title %></li>
+	</ol>
 	<p>
 		<% if current_user.admin? %>
 			<%= link_to 'Edit', edit_presentation_path(@presentation) %> |
 		<% end %>
-		<%= link_to 'Download', @presentation.slides.url, :download=>@presentation.title+".pdf" %> | <%= link_to 'Return to list of presentations', presentations_path %>
+		<%= link_to 'Download', @presentation.slides.url, :download=>@presentation.title+".pdf" %>
 	</p>
 </div>
 

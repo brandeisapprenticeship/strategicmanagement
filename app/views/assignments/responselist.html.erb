@@ -1,22 +1,58 @@
 <div class='page-header'>
   <h1>Responses for Assignment: <%=@assignment.discussion_title%></h1>
-  <%=link_to "Download all responses", {:controller => 'assignments', :action => 'responselist', :id => @assignment.id, :format=>:csv}%>
+  <ol class='breadcrumb'>
+    <li><%= link_to "Presentations", presentations_path %></li>
+    <li><%= link_to @assignment.presentation.title, @assignment.presentation %></li>
+    <li class='active'><%= @assignment.discussion_title %></li>
+  </ol>
+  <p><%=link_to "Download all responses", {:controller => 'assignments', :action => 'responselist', :id => @assignment.id, :format=>:csv}%></p>
 </div>
-<table class='table table-bordered'>
+<table class='table'>
   <thead>
       <tr>
-        <th><%= sortable "title", "Headline", :id => @assignment.id %></th>
         <th><%= sortable "user_name", "Author", :id => @assignment.id %></th>
         <th><%= sortable "updated_at", "Last Updated", :id => @assignment.id%></th>
+        <th>Response</th>
+        <th>Likes</th>
       </tr>
     </thead>
     <tbody>
       <% @response.each do |response| %>
         <tr>
-          <td><%= link_to response.content.lines.first.html_safe, response %></td>
+          
           <td><%= response.user.name%></td>
           <td><%= time_ago_in_words(response.updated_at)%> ago</td>
+          <td style='max-width: 500px'>
+            <div class='response'>
+              <%=  response.content.html_safe %>
+            </div>
+          </td>
+          <td>
+            <p>
+              <%= pluralize response.likes.count, 'like' %> 
+              </p>
+            <% unless response.user.id == current_user.id %>
+              <%if Like.where(response_id: response.id, user_id: current_user.id).exists?%>
+                <p><%= link_to 'Unlike', Like.where(response_id: response.id, user_id: current_user.id).first, method: :delete, class:'btn btn-sm btn-link' %></p>
+              <%else%>
+                <%=form_for(Like.new) do |x|%>
+                  <%=x.hidden_field :user_id, value: current_user.id%>
+                  <%=x.hidden_field :response_id, value: response.id%>
+                  <p><%=x.submit "Like", class:'btn btn-sm btn-link'%></p>
+                <%end%>
+              <% end %>
+               </div>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
 </table>
+
+<script type='text/javascript'>
+$(function(){
+  $('.response').readmore({
+    collapsedHeight: 50,
+  });
+});
+</script>

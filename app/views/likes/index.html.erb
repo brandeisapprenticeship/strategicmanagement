@@ -20,9 +20,17 @@
       <tr>
         <td><%= like.response.assignment.discussion_title %></td>
         <td><%= like.response.user.name %></td>
-        <td><%= like.response.content.html_safe %></td>
+        <td><div class='response'><%= like.response.content.html_safe %></div></td>
         <td><%= link_to "View post", like.response %> </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<script type='text/javascript'>
+$(function(){
+  $('.response').readmore({
+    collapsedHeight: 50,
+  });
+});
+</script>
