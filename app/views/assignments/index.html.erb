@@ -1,6 +1,9 @@
 <div class =" jumbotron" > 
   <h1>Welcome to <%= Setting.class_name %></h1> 
   <p class='h2'><%= Setting.site_title %></p>
+  <% if current_user.admin? %>
+    <p><%= link_to 'New Presentation', new_presentation_path, class: 'btn btn-primary' %></p>
+  <% end %>
 </div>
 
 <p id="notice"><%= notice %></p>
@@ -8,7 +11,7 @@
   <div class='page-header'>
     <h2>
       <% if !@presentation.nil? %>
-        Current presentation: <%= @presentation.title %>
+        Current presentation: <%= @presentation.title %> <small><%= link_to "(edit)", edit_presentation_path(@presentation) %></small>
       <% else %>
         No presentations yet
       <% end %>
@@ -19,9 +22,6 @@
   
   <div class="row">
   <div class="col-md-6">
-  <% if current_user.admin? %>
-    <%= link_to 'New Presentation', new_presentation_path, class: 'btn btn-primary' %>
-  <% end %>
       <% unless @presentation.nil? %>
       <table class="table">
         <thead>

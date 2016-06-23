@@ -2,8 +2,5 @@
 
 <%= link_to 'Edit', edit_presentation_path(@presentation) %> |
 <%= link_to 'Back', presentations_path %>
- 
-
-<p> </p> 
 
 <iframe src="<%= @presentation.slides.url %>" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
