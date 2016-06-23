@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
 	before_filter :admin_only
+	before_filter :check_if_enabled
 	def show
 		@about_text=Setting.about_text
 		@site_title=Setting.site_title
@@ -18,6 +19,12 @@ class SettingsController < ApplicationController
 	def admin_only
 		unless current_user.admin? 
 			redirect_to root_path, :alert => "Access denied."
+		end
+	end
+
+	def check_if_enabled
+		unless Setting.show_settings_page
+			redirect_to root_path, :alert=>"User settings are disabled."
 		end
 	end
 end

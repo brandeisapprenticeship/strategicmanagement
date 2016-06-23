@@ -19,8 +19,9 @@
 			<li> <%= link_to 'About This Class', home_about_path %> </li >
 			<% if current_user.admin? %>
 				<li> <%= link_to 'Portfolios', responses_userlist_path %> </li >
-				
-				<li> <%= link_to 'Site Settings', show_settings_path %> </li >
+        <%if Setting.show_settings_page %>
+				  <li> <%= link_to 'Site Settings', show_settings_path %> </li >
+        <% end %>
 			<% end %>
 			</li > 
             
