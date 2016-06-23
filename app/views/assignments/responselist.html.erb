@@ -46,6 +46,14 @@
           </td>
         </tr>
       <% end %>
+      <% @no_response.each do |student| %>
+      <tr class='danger'>
+        <td><%= student.name %></td>
+        <td class='text-center'>-</td>
+        <td><i>No submission</i></td>
+        <td></td>
+      </tr>
+      <% end %> 
     </tbody>
 </table>
 

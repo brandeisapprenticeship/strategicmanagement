@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623174630) do
+ActiveRecord::Schema.define(version: 20160623031120) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.uuid     "visit_id",   limit: 16
@@ -32,13 +32,6 @@ ActiveRecord::Schema.define(version: 20160623174630) do
     t.string   "edit_question",       limit: 255
     t.integer  "slide_number",        limit: 4
     t.integer  "presentation_id",     limit: 4
-  end
-
-  create_table "bootsy_images", force: :cascade do |t|
-    t.string   "image_file",       limit: 255
-    t.integer  "image_gallery_id", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -84,7 +77,7 @@ ActiveRecord::Schema.define(version: 20160623174630) do
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "name",                   limit: 255
     t.boolean  "admin",                              default: false, null: false
-    t.boolean  "output"
+    t.boolean  "optout"
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

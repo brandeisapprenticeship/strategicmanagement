@@ -26,6 +26,7 @@ class AssignmentsController < ApplicationController
       else
         @response = Response.where(assignment_id: @assignment.id).order(sort_column + " " + sort_direction)
       end
+      @no_response = User.where.not(id: @response.pluck(:user_id)).where(admin: false)
       respond_to do |format|
         format.html
         format.csv {send_data @assignment.as_csv, :filename=>@assignment.discussion_title+".csv"}

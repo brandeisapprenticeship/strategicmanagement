@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :name
 
       t.boolean :admin, null: false, default: false
-      t.boolean :output
+      t.boolean :optout
 
       ## Recoverable
       t.string   :reset_password_token
