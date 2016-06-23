@@ -16,17 +16,19 @@
           <ul class="nav navbar-nav">
             <li > <%= link_to 'Home', root_path  %> </li >
 			<li > <%= link_to 'Presentations', presentations_path  %> </li >
-			<li> <%= link_to 'About This Class', home_about_path %> </li >
+      <li > <%= link_to 'My likes', likes_path %></li >
 			<% if current_user.admin? %>
 				<li> <%= link_to 'Portfolios', responses_userlist_path %> </li >
         <%if Setting.show_settings_page %>
 				  <li> <%= link_to 'Site Settings', show_settings_path %> </li >
         <% end %>
 			<% end %>
-			</li > 
+      <li> <%= link_to 'About This Class', home_about_path %> </li >
+
             
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            
             <li > <%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li >
           </ul>
           <% end %>

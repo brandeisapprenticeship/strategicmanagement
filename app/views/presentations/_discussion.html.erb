@@ -5,9 +5,9 @@
         <thead>
           <tr>
             <th>Question</th>
-            <th>Slide number</th>
+            <th>Slide</th>
             <th>Due Date</th>
-            <th class='text-center' colspan="<%= !current_user.admin? ? 2 : 4 %>">Actions</th>
+            <th class='text-center' colspan="<%= !current_user.admin? ? 2 : 4 %>"></th>
           </tr>
         </thead>
 
@@ -22,12 +22,12 @@
               <td>Due date has passed</td>
                 <%elsif Response.where(user_id: current_user.id, assignment_id: assignment.id).exists?%>
                   <%@response = Response.where(user_id: current_user.id, assignment_id: assignment.id).first%>
-                  <td><%=link_to "Edit/Continue Assignment", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}%></td>
+                  <td><%=link_to "Edit response", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}%></td>
                 <%else%>
-                  <td><%= link_to "Start Assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}%></td>
+                  <td><%= link_to "Start assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}%></td>
                 <%end%>
               <%end%>
-              <td><%=link_to "View responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
+              <td><%=link_to "Class responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
               <%if current_user.admin?%>
                 <td><%=link_to "Download responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id, :format=>:csv}%></td>
                 <td><%= link_to 'Edit',  {:controller => 'assignments', :action => 'edit', :id => assignment.id} %></td>
