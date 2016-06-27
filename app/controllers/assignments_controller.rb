@@ -66,7 +66,7 @@ class AssignmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
-        format.html { redirect_to assignments_path, notice: 'Assignment was successfully updated.' }
+        format.html { redirect_to presentation_path(@assignment.presentation_id), notice: 'Assignment was successfully updated.' }
         format.json { render :show, status: :ok, location: @assignment }
       else
         format.html { render :edit }

@@ -1,11 +1,13 @@
-<div class='page-header'>
-  <h1>Responses for Assignment: <%=@assignment.discussion_title%></h1>
-  <ol class='breadcrumb'>
+<ol class='breadcrumb'>
     <li><%= link_to "Presentations", presentations_path %></li>
     <li><%= link_to @assignment.presentation.title, @assignment.presentation %></li>
     <li class='active'><%= @assignment.discussion_title %></li>
   </ol>
-  <p><%=link_to "Download all responses", {:controller => 'assignments', :action => 'responselist', :id => @assignment.id, :format=>:csv}%></p>
+<div class='page-header'>
+  <h1>Responses for Assignment: <%=@assignment.discussion_title%></h1>
+  <% if current_user.admin? %>
+    <p><%=link_to "Download all responses", {:controller => 'assignments', :action => 'responselist', :id => @assignment.id, :format=>:csv}, class: 'btn btn-primary'%></p>
+  <% end %>
 </div>
 <table class='table'>
   <thead>
@@ -13,7 +15,7 @@
         <th><%= sortable "user_name", "Author", :id => @assignment.id %></th>
         <th><%= sortable "updated_at", "Last Updated", :id => @assignment.id%></th>
         <th>Response</th>
-        <th>Likes</th>
+        <th colspan=2>Likes</th>
       </tr>
     </thead>
     <tbody>
@@ -28,32 +30,35 @@
             </div>
           </td>
           <td>
-            <p>
+            <p class='btn-sm-padding-vertical'>
               <%= pluralize response.likes.count, 'like' %> 
               </p>
+          </td>
+          <td>
             <% unless response.user.id == current_user.id %>
               <%if Like.where(response_id: response.id, user_id: current_user.id).exists?%>
-                <p><%= link_to 'Unlike', Like.where(response_id: response.id, user_id: current_user.id).first, method: :delete, class:'btn btn-sm btn-link' %></p>
+                <p><%= link_to 'Unlike', Like.where(response_id: response.id, user_id: current_user.id).first, method: :delete, class:'btn btn-sm btn-primary' %></p>
               <%else%>
                 <%=form_for(Like.new) do |x|%>
                   <%=x.hidden_field :user_id, value: current_user.id%>
                   <%=x.hidden_field :response_id, value: response.id%>
-                  <p><%=x.submit "Like", class:'btn btn-sm btn-link'%></p>
+                  <p><%=x.submit "Like", class:'btn btn-sm btn-primary'%></p>
                 <%end%>
               <% end %>
-               </div>
             <% end %>
           </td>
         </tr>
       <% end %>
-      <% @no_response.each do |student| %>
-      <tr class='danger'>
-        <td><%= student.name %></td>
-        <td class='text-center'>-</td>
-        <td><i>No submission</i></td>
-        <td></td>
-      </tr>
-      <% end %> 
+      <% if current_user.admin? %>
+        <% @no_response.each do |student| %>
+        <tr class='danger'>
+          <td><%= student.name %></td>
+          <td class='text-center'>-</td>
+          <td><i>No submission</i></td>
+          <td colspan='2'></td>
+        </tr>
+        <% end %>
+      <% end %>
     </tbody>
 </table>
 

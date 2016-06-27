@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
       <% unless @presentation.nil? %>
-      <table class="table">
+      <table class="table middle">
         <thead>
           <tr>
             <th>Question</th>
@@ -19,19 +19,19 @@
               <td><%= assignment.due_date.strftime("%-b %-d at %I:%M%p") %></td>
               <%if !current_user.admin?%>
               <% if assignment.due_date < Time.zone.now %>
-              <td>Due date has passed</td>
+              <td class='text-danger text-center'>Due date has passed</td>
                 <%elsif Response.where(user_id: current_user.id, assignment_id: assignment.id).exists?%>
                   <%@response = Response.where(user_id: current_user.id, assignment_id: assignment.id).first%>
-                  <td><%=link_to "Edit response", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}%></td>
+                  <td><%=link_to "Edit response", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}, class: 'btn btn-warning btn-block'%></td>
                 <%else%>
-                  <td><%= link_to "Start assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}%></td>
+                  <td><%= link_to "Start assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}, class: 'btn btn-success btn-block'%></td>
                 <%end%>
               <%end%>
-              <td><%=link_to "Class responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}%></td>
+              <td><%=link_to "View class responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}, class: 'btn btn-link'%></td>
               <%if current_user.admin?%>
-                <td><%=link_to "Download responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id, :format=>:csv}%></td>
-                <td><%= link_to 'Edit',  {:controller => 'assignments', :action => 'edit', :id => assignment.id} %></td>
-                <td><%= link_to 'Delete', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%=link_to fa_icon("download"), {:controller => 'assignments', :action => 'responselist', :id => assignment.id, :format=>:csv},  title:"Download class responses", class: 'btn btn-primary btn-icon'%></td>
+                <td><%= link_to fa_icon("pencil"),  {:controller => 'assignments', :action => 'edit', :id => assignment.id}, class: 'btn btn-primary btn-icon', title:'Edit question' %></td>
+                <td><%= link_to fa_icon("trash"), assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-icon', title:'Delete question' %></td>
               <%end%>
             </tr>
           <% end %>
@@ -50,11 +50,15 @@
       </table>
       <% end %>
   </div> 
+
   <% unless @presentation.nil? %>
-  <div class="col-md-6"> 
+
+  <div class="col-md-4"> 
       <iframe id='presentation' src="<%= @presentation.slides.url %>" frameborder="0" width="100%" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
    </div>
-   <% end %>
+   
+  
+  <% end %>
   </div>
 
  

@@ -1,4 +1,11 @@
-<h1>Editing Presentation</h1>
+<ol class='breadcrumb'>
+	<li><%= link_to "Presentations", presentations_path %></li>
+	<li><%= link_to @presentation.title, @presentation %></li>
+	<li class='active'>Edit</li>
+</ol>
+<div class='page-header'>
+	<h1>Editing Presentation</h1>
+</div>
 
 <%= render 'form' %>
 

@@ -1,17 +1,25 @@
-<h1>User Portfolios</h1>
-<table class='table table-striped'>
+<ol class='breadcrumb'>
+	<li class='active'>Portfolios</li>
+</ol>
+<div class='page-header'>
+	<h1>User Portfolios</h1>
+</div>
+<!-- <table class='table table-striped'>
 	<thead>
 	    <tr>
 	      <th>Name</th>
 	      <th>Link to Portfolio</th>
 	    </tr>
   	</thead>
-  	<tbody>
+  	<tbody> -->
+<ul class='list-group'>
 	    <% @users.each do |user| %>
-	      <tr>
+	      <!-- <tr>
 	        <td><%= user.name %></td>
 	        <td><%= link_to "Go",  {:controller => 'responses', :action => 'index', :user_id => user.id}%></td>
-	      </tr>
+	      </tr> -->
+	      <li class='list-group-item'><%= link_to user.name, {:controller => 'responses', :action => 'index', :user_id => user.id} %></li>
 	    <% end %>
-  	</tbody>
-</table>
+</ul>
+<!--   	</tbody>
+</table> -->

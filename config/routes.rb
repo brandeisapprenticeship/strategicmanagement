@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :likes
   get 'responses/userlist'
-  get 'assignments/responselist'
+  get 'assignments(/:id)/responselist', to:'assignments#responselist'
+  get 'portfolios', to:'responses#userlist'
+  get 'portfolios(/:user_id)', to:'responses#index'
   mount Ckeditor::Engine => '/ckeditor'
   resources :responses
   resources :presentations do

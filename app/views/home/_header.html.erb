@@ -18,7 +18,7 @@
 			<li > <%= link_to 'Presentations', presentations_path  %> </li >
       
 			<% if current_user.admin? %>
-				<li> <%= link_to 'Portfolios', responses_userlist_path %> </li >
+				<li> <%= link_to 'Portfolios', portfolios_path %> </li >
         <%if Setting.show_settings_page %>
 				  <li> <%= link_to 'Site Settings', show_settings_path %> </li >
         <% end %>

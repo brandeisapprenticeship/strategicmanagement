@@ -1,7 +1,10 @@
+<ol class='breadcrumb'>
+  <li class='active'>Likes</li>
+</ol>
 <div class='page-header'>
   <h1>My likes</h1>
 </div>
-<p id="notice"><%= notice %></p>
+
 
 
 <% if !@likes.empty? %>
@@ -21,7 +24,7 @@
           <td><%= like.response.assignment.discussion_title %></td>
           <td><%= like.response.user.name %></td>
           <td style='max-width: 650px;'><div class='response'><%= like.response.content.html_safe %></div></td>
-          <td><p><%= link_to 'Unlike', like, method: :delete, class:'btn btn-sm btn-link' %></p> </td>
+          <td><p><%= link_to 'Unlike', like, method: :delete, class:'btn btn-primary btn-sm' %></p> </td>
         </tr>
       <% end %>
     </tbody>

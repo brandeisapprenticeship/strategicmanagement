@@ -14,8 +14,24 @@
 
 
 <div class="container">
+	<% flash.each do |key, value| %>
+    <% unless value.blank? %>
+    <div class="alert alert-<%= key %>">
+      <a href="#" data-dismiss="alert" class="close">×</a>
+      <p><%= value %></p>
+    </div>
+  <% end %>
+<% end %>
+
+
 	<%= yield %>
 </div>
+
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Please contact <a href='mailto:brandeisapprenticeship@gmail.com'>brandeisapprenticeship@gmail.com</a> with any questions.</p>
+      </div>
+    </footer>
 
 </body>
 

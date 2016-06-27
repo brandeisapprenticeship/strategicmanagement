@@ -1,18 +1,24 @@
+<ol class='breadcrumb'>
+	<li><%= link_to "Presentations", presentations_path %></li>
+	<li class='active'><%= @presentation.title %></li>
+</ol>
 <div class='page-header'>
-	<h1><%= @presentation.title %></h1>
-	<ol class='breadcrumb'>
-		<li><%= link_to "Presentations", presentations_path %></li>
-		<li class='active'><%= @presentation.title %></li>
-	</ol>
-	<p>
+
+	<h1>
+		<%= @presentation.title %>
 		<% if current_user.admin? %>
-			<%= link_to 'Edit', edit_presentation_path(@presentation) %> |
+			<small><%= link_to 'Edit', edit_presentation_path(@presentation) %></small>
 		<% end %>
-		<%= link_to 'Download', @presentation.slides.url, :download=>@presentation.title+".pdf" %>
+	</h1>
+	 
+	<p>
+		
+		<%= link_to 'Download presentation', @presentation.slides.url, :download=>@presentation.title+".pdf", class:'btn btn-info' %>
+
 	</p>
 </div>
 
-<p id="notice"><%= notice %></p>
+
 
 
 <%= render 'discussion' %>

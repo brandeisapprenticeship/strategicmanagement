@@ -62,7 +62,7 @@ class PresentationsController < ApplicationController
   def destroy
     @presentation.destroy
     respond_to do |format|
-      format.html { redirect_to presentations_url, notice: 'Presentation was successfully destroyed.' }
+      format.html { redirect_to presentations_url, notice: 'Presentation was successfully deleted.' }
       format.json { head :no_content }
     end
   end

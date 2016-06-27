@@ -4,54 +4,54 @@
 <h3>By: <%=@response.user.name%></h3>
 <br>
 <div class="responsecontent">
-  <%=@response.content.html_safe%>
+	<%=@response.content.html_safe%>
 </div>
 
 <% else %>
+<div class='row'>
+	<div class='col-md-6'>
+		<%= form_for(@response) do |f| %>
+		<% if @response.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
 
-<h1><%=@assignment.discussion_question.html_safe%></h1> 
+			<ul>
+				<% @response.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+		<div class="field">
+			<div>
+				<%= f.hidden_field :assignment_id, value: @assignment.id%>
+			</div>
+		</div>
 
-<%= form_for(@response) do |f| %>
-  <% if @response.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
+		<div class="form-group">
+				<%= f.label :content, class:'control-label sr-only' %><br>
+				<%= f.bootsy_area :content, class:'form-control', rows:8, class:'form-control' %>
+		</div>
 
-      <ul>
-      <% @response.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+			<%= f.hidden_field :user_id, value: @user.id%>
+			<%= f.hidden_field :user_name, value: @user.name%>
 
 
-  <% unless @presentation.nil? %> 
-        <iframe src="<%= @presentation.slides.url %>#page=<%= @assignment.slide_number %>" frameborder="0" width="400" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-    <% end %>
+		<div class="form-group">
+			<%= f.submit "Save", class:'btn btn-primary' %> <%= link_to "Cancel", @presentation, class: 'btn btn-link' %>
+		</div>
+		<% end %>
+	</div>
 
-  <div class="field">
-     <div>
-    <%= f.hidden_field :assignment_id, value: @assignment.id%>
-  </div>
-  </div>
 
-  <div class="field">
-     <div>
-    <%= f.label :content %><br>
-    <%= f.bootsy_area :content, class:'form-control', rows:8 %>
-  </div>
-  </div>
 
-  <div class="field">
-    <%= f.hidden_field :user_id, value: @user.id%>
-  </div>
 
-  <div class="field">
-    <%= f.hidden_field :user_name, value: @user.name%>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% unless @presentation.nil? %>
+<div class='col-md-6'>
+<iframe src="<%= @presentation.slides.url %>#page=<%= @assignment.slide_number %>" frameborder="0" class='pretty-frame' allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 <% end %>
+</div>
+</div>
+
+
 <% end %>
