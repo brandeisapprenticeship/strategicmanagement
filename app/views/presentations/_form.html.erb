@@ -11,17 +11,29 @@
     </div>
   <% end %>
 
-   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title%>
+   <div class="form-group">
+    <%= f.label :title, class:'control-label' %><br>
+    <%= f.text_field :title, class:'form-control'%>
   </div>
 
-   <div class="field">
-    <%= f.label :slides %><br>
-    <%= f.file_field :slides%>
-  </div>
+       
+
+
+     <% unless @presentation.slides.blank? %>
+
+        <div class='form-group'>
+          <label class='conrol-label'>Current slides</label>
+            <iframe class='pretty-frame' id='presentation' src="<%= @presentation.slides.url %>" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+        </div>
+
+    <% end %>
+    <div class="form-group">
+
+        <%= f.label :slides, @presentation.slides.blank? ? "Slides" : "Change slides", class:'control-label' %><br>
+        <%= f.file_field :slides, class:'form-control'%>
+      </div>
   
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit class:'btn btn-primary' %>
   </div>
 <% end %>
