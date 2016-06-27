@@ -1,35 +1,45 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<div class="page-header">
+<h1 class="text-center">Sign up</h1>
+</div>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html=>{:class=>'form-horizontal'}) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :name, class:'control-label col-md-2 col-md-offset-1' %>
+    <div class='col-md-6'>
+    <%= f.text_field :name, autofocus: true, class:'form-control' %>
+  </div>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :email, class:'control-label col-md-2 col-md-offset-1' %>
+    <div class='col-md-6'>
+    <%= f.email_field :email, autofocus: true, class:'form-control' %>
+  </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
+  <div class="form-group">
+    <%= f.label :password, class:'control-label col-md-2 col-md-offset-1'  %>
+    <div class='col-md-6'>
+    <%= f.password_field :password, autocomplete: "off", class:'form-control' %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <span class='help-block'>(<%= @minimum_password_length %> characters minimum)</span>
+    <% end %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <div class="form-group">
+    <%= f.label :password_confirmation, class:'control-label col-md-2 col-md-offset-1'  %>
+    <div class='col-md-6'>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control' %>
   </div>
+</div>
 
-  <div>
-    <p><font size="1">RESEARCH PARTICIPATION AGREEMENT </p>
-    <textarea> 
-    
+
+<div class='form-group'>
+    <label class='control-label col-md-2 col-md-offset-1' for='research-agreement'>Research Participation Agreement</label>
+    <div class='col-md-6'>
+      <textarea id='research-agreement' class='form-control' readonly rows=10>
 By registering for an account on Community Learning Platform (CLP), I consent to participate in this study. If, during the course of this study, significant new informa- tion developed during the study becomes available, which may relate to my willingness to continue to participate, this information will be provided to me by the investigators. I understand that any information derived from this research project which personally iden- tifies me will not be voluntarily released or disclosed without my separate consent, except as specifically required by law.
 By registering for an account I am verifying that I am 18 years or older. 
 WAIVER OF DOCUMENTATION OF INFORMED CONSENT 
@@ -47,18 +57,37 @@ Once I agree to participate in this study I acknowledge to the following: 1. I a
 
 6. I understand that I am free to exit the study at any time. To remove myself from the study, I simply do not log into the site related to the study. If I decide to leave the study, the data collected on me will be removed from the study. If at any time you have questions regarding the research or your participation, you should contact the researchers who must answer all questions to the best of their knowledge. You can reach the Principal Investigator, Dr. Richard Alterman, via email at ralterma@brandeis.edu or by phone at 781-736-2703 and you can reach the student investigator, Ken Harsch, via email at kharsch@brandeis.edu or by phone at 330-907-1419 and student investigator, Maria Altebarmakian, via email at maltebar@brandeis.edu or by phone at 559-287-8076.  If you have questions about your rights as a research subject please contact the Brandeis Institutional Review Board at irb@brandeis.edu or 781-736-8133.
 
-</textarea>
+    </textarea>
   </div>
-
-   <div class="field">
-    <%= f.label "Check box to opt out of data collection:" %> <br />
-    <%= f.check_box :optout %> <br />
 </div>
 
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+ <div class="form-group">
+    <div class="col-md-offset-3 col-sm-6">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :optout %>  Check box to opt out of data collection
+        </label>
+      </div>
+    </div>
   </div>
+
+
+
+  <div class="form-group">
+    <div class="col-md-6 col-md-offset-3">
+    <%= f.submit "Sign up", class:'btn btn-primary' %>
+  </div>
+
+</div>
+  <div class="form-group">
+    <div class="col-md-6 col-md-offset-3">
+      <%= render "devise/shared/links" %>
+  </div>
+</div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+
+
+
+  
