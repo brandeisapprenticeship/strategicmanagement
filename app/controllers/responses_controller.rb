@@ -48,7 +48,7 @@ class ResponsesController < ApplicationController
     @user = current_user
     respond_to do |format|
       if @response.save
-        format.html { redirect_to assignments_path, notice: 'Response was successfully created.' }
+        format.html { redirect_to presentation_path(@response.assignment.presentation.id), notice: 'Response was successfully created.' }
         format.json { render :show, status: :created, location: @response }
       else
         format.html { render :new }
