@@ -17,6 +17,25 @@ class LikesController < ApplicationController
     @like = Like.new
   end
 
+  def like
+    @like = Like.new(user_id: current_user.id, response_id: params[:response_id])
+    respond_to do |format|
+      if @like.save
+        format.json {render :show}
+      end
+    end
+  end
+
+  def unlike
+    @like = Like.where(user_id: current_user.id, response_id: params[:response_id]).first
+    respond_to do |format|
+      if @like.destroy
+        @likes = Like.where(response_id: params[:response_id])
+        format.json {render json: {"number"=>@likes.size, "words"=>view_context.pluralize(@likes.size, "like")}}
+      end
+    end
+  end
+
   # GET /likes/1/edit
   def edit
   end

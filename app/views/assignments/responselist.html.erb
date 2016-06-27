@@ -20,7 +20,7 @@
     </thead>
     <tbody>
       <% @response.each do |response| %>
-        <tr>
+        <tr data-response-id="<%= response.id %>">
           
           <td><%= response.user.name%></td>
           <td><%= time_ago_in_words(response.updated_at)%> ago</td>
@@ -30,12 +30,12 @@
             </div>
           </td>
           <td>
-            <p class='btn-sm-padding-vertical'>
+            <p class='btn-sm-padding-vertical like-count'>
               <%= pluralize response.likes.count, 'like' %> 
-              </p>
+            </p>
           </td>
-          <td>
-            <% unless response.user.id == current_user.id %>
+          <td> <% unless response.user.id == current_user.id %>
+            <div class='no-js'>
               <%if Like.where(response_id: response.id, user_id: current_user.id).exists?%>
                 <p><%= link_to 'Unlike', Like.where(response_id: response.id, user_id: current_user.id).first, method: :delete, class:'btn btn-sm btn-primary' %></p>
               <%else%>
@@ -45,7 +45,18 @@
                   <p><%=x.submit "Like", class:'btn btn-sm btn-primary'%></p>
                 <%end%>
               <% end %>
-            <% end %>
+            </div>
+            <div class='js' style='display:none;'>
+             
+                <button class='btn btn-primary btn-sm like-button'>
+                <%if Like.where(response_id: response.id, user_id: current_user.id).exists?%>
+                  Unlike
+                <%else%>
+                 Like
+                <% end %>
+                </button>
+              </div>
+               <% end %>
           </td>
         </tr>
       <% end %>
@@ -63,9 +74,48 @@
 </table>
 
 <script type='text/javascript'>
+function updateLikeCount(button,newLikes){
+  button.parents("tr").find(".like-count").html(newLikes);
+}
+
 $(function(){
   $('.response').readmore({
     collapsedHeight: 50,
   });
+  $('.no-js').hide();
+  $('.js').show();
+
+  $('.like-button').click(function(e){
+    e.preventDefault();
+    var response_id=$(this).parents("tr").attr('data-response-id');
+    var button = $(this);
+    if($(this).html().trim()=="Like"){
+      $.ajax({
+        url:"<%= like_item_path %>",
+        data:{"response_id":response_id},
+        method:"GET",
+        dataType:"JSON"
+        }).done(function(data){
+          updateLikeCount(button,data.response_likes_words);
+          button.html("Unlike");
+        });
+    }
+    else{
+       $.ajax({
+        url:"<%= unlike_item_path %>",
+        data:{"response_id":response_id},
+        method:"GET",
+        dataType:"JSON"
+        }).done(function(data){
+          updateLikeCount(button,data.words);
+          button.html("Like");
+        });
+    }
+  });
+
+  
 });
+
+
+
 </script>

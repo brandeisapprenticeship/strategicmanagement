@@ -21,6 +21,13 @@ class ResponsesController < ApplicationController
     end
   end
 
+  def likes
+    @likes = Like.where(response_id: params[:id])
+    respond_to do |format|
+      format.json {render json: {"number"=>@likes.size, "words"=>view_context.pluralize(@likes.size, "like")}}
+    end
+  end
+
   def userlist
     @users = User.where(admin: false).order(name: :asc)
 
