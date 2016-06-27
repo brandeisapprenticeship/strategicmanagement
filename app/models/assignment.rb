@@ -1,6 +1,9 @@
 class Assignment < ActiveRecord::Base
 	has_many :responses
 	belongs_to :presentation
+	validates :discussion_title, presence: true
+	validates :due_date, presence: true
+
 
 	def as_csv
 	  CSV.generate do |csv|
