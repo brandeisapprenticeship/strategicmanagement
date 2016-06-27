@@ -17,4 +17,6 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootsy
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .
