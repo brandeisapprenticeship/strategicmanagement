@@ -1,0 +1,44 @@
+<div class =" jumbotron" > 
+  <h1>Welcome to <%= Setting.class_name %></h1>
+  <div class='row'>
+    <div class='col-md-<%= current_user.admin? ? 6 : 12 %>'>
+      <p class='h2'><%= Setting.site_title %></p>
+    </div>
+    <% if current_user.admin? %>
+      <div class='col-md-6 text-right'>
+
+         <%= link_to 'New Presentation', new_presentation_path, class: 'btn btn-success visible-md-inline visible-lg-inline' %>
+         <%= link_to 'New Presentation', new_presentation_path, class: 'btn btn-success btn-block visible-sm-block visible-xs-block' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+  <div class='page-header'>
+
+    <% if !@presentation.nil? %>
+      <h2 class='h1'>
+        Current presentation: <%= @presentation.title %>
+        <% if current_user.admin? %>
+          <small><%= link_to 'Edit', edit_presentation_path(@presentation) %></small>
+        <% end %>  
+
+      </h2>
+      <p>
+        <%= link_to 'Download presentation', @presentation.slides.url, :download=>@presentation.title+".pdf", class:'btn btn-info' %>
+        
+      </p>
+    <% else %>
+      <h2 class='h1'>No presentations yet</h2>
+    <% end %>
+  </div>
+
+
+  
+  <%= render 'presentations/summary' %>
+
+
+
+

@@ -1,0 +1,39 @@
+
+
+<h1>All Responses to Discussion Questions : <%=@presentation%></h1>
+
+<% @presentations.each do |presentation| %>
+
+		<table class='table table-bordered'>
+		  <thead>
+		    
+		  </thead>
+		    <tbody>
+		 		<% presentation.assignments.each do |assignment| %> 
+		 		<tr>
+		 			<h3><%=assignment.discussion_title%> </h3> <h5><%= assignment.due_date %></h5>
+					<table class='table table-bordered'>
+					  <thead>
+					      <tr>
+					        <th>Headline<%#= sortable "title", "Headline", :id => assignment.id %></th>
+					        <th>Author<%#= sortable "user_name", "Author", :id => assignment.id %></th>
+					        <th>Updated<%#= sortable "updated_at", "Last Updated", :id => assignment.id%></th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <% assignment.responses.each do |response| %>
+					        <tr>
+					          <td><%= link_to response.content.html_safe, response %></td>
+					          <td><%= response.user.name%></td>
+					          <td><%= time_ago_in_words(response.updated_at)%> ago</td>
+					        </tr>
+					      <% end %>
+					    </tbody>
+					</table>
+		 		</tr> 
+		      <% end %>
+		    </tbody>
+		</table>
+<% end %> 
+
+

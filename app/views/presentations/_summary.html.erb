@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-8">
+      <% unless @presentation.nil? %>
+      <table class="table middle">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Slide</th>
+            <th>Due Date</th>
+            <th class='text-center' colspan="<%= !current_user.admin? ? 2 : 4 %>"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @assignments.each do |assignment| %>
+            <tr>
+              <td><%= assignment.discussion_title %></td>
+              <td><%= assignment.slide_number %></td>
+              <td><%= assignment.due_date.strftime("%-b %-d at %I:%M%p") %></td>
+              <%if !current_user.admin?%>
+              <% if assignment.due_date < Time.zone.now %>
+              <td class='text-danger text-center'>Due date has passed</td>
+                <%elsif Response.where(user_id: current_user.id, assignment_id: assignment.id).exists?%>
+                  <%@response = Response.where(user_id: current_user.id, assignment_id: assignment.id).first%>
+                  <td><%=link_to "Edit response", {:controller => 'responses', :action => 'edit', :id => @response.id, :assignment_id => assignment.id}, class: 'btn btn-warning btn-block'%></td>
+                <%else%>
+                  <td><%= link_to "Start assignment", {:controller => 'responses', :action => 'new', :assignment_id => assignment.id}, class: 'btn btn-success btn-block'%></td>
+                <%end%>
+              <%end%>
+              <td><%=link_to "View class responses", {:controller => 'assignments', :action => 'responselist', :id => assignment.id}, class: 'btn btn-link'%></td>
+              <%if current_user.admin?%>
+                <td><%=link_to fa_icon("download"), {:controller => 'assignments', :action => 'responselist', :id => assignment.id, :format=>:csv},  title:"Download class responses", class: 'btn btn-primary btn-icon'%></td>
+                <td><%= link_to fa_icon("pencil"),  {:controller => 'assignments', :action => 'edit', :id => assignment.id}, class: 'btn btn-primary btn-icon', title:'Edit question' %></td>
+                <td><%= link_to fa_icon("trash"), assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-icon', title:'Delete question' %></td>
+              <%end%>
+            </tr>
+          <% end %>
+           <% if @assignments.empty? %>
+            <td colspan='7' class='text-center'><i>No discussions yet</i></td>
+          <% end %>
+          <% if current_user.admin?%>
+          <tr>
+            <td colspan='7'>
+              <p class='text-center'><a href='#' id='new_question'>New question...</a></p>
+              <%= render 'assignments/form' %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+  </div> 
+
+  <% unless @presentation.nil? %>
+
+  <div class="col-md-4"> 
+      <iframe class='pretty-frame' id='presentation' src="<%= @presentation.slides.url %>" frameborder="0" width="100%" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+   </div>
+   
+  
+  <% end %>
+  </div>
+
+ 
+<script type='text/javascript'>
+$(function(){
+  $('#new_assignment').hide();
+
+  $('#controls').append("<a id='cancel_new_question' class='btn btn-link'>cancel</a>");
+
+
+  $('#new_question').click(function(e){
+    e.preventDefault();
+    $(this).hide();
+    $('#new_assignment').show();
+  });
+  $('#cancel_new_question').click(function(e){
+    $('#new_question').show();
+    $('#new_assignment').hide();
+  });
+});
+</script>

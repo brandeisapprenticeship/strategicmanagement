@@ -1,0 +1,42 @@
+<ol class='breadcrumb'>
+  <li class='active'>Likes</li>
+</ol>
+<div class='page-header'>
+  <h1>My likes</h1>
+</div>
+
+
+
+<% if !@likes.empty? %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Assignment</th>
+        <th>Author</th>
+        <th>Content</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @likes.each do |like| %>
+        <tr>
+          <td><%= like.response.assignment.discussion_title %></td>
+          <td><%= like.response.user.name %></td>
+          <td style='max-width: 650px;'><div class='response'><%= like.response.content.html_safe %></div></td>
+          <td><p><%= link_to 'Unlike', like, method: :delete, class:'btn btn-primary btn-sm' %></p> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+<p><i>You have not liked any posts yet</i></p>
+<% end %>
+
+<script type='text/javascript'>
+$(function(){
+  $('.response').readmore({
+    collapsedHeight: 50,
+  });
+});
+</script>

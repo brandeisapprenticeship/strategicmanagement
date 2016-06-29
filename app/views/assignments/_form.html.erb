@@ -1,0 +1,56 @@
+<% if current_user.admin? %> 
+<% if @presentation.nil? %>
+<h2>You must upload the presentation first.</h2>
+<% else %>
+
+<%= form_for(@assignment) do |f| %>
+                <% if @assignment.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+
+                    <ul>
+                    <% @assignment.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+
+                
+
+                <div class="form-group">
+                  <%= f.label :discussion_title, class:'control-label' %>
+                  <%= f.text_field :discussion_title, class:'form-control'%>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :discussion_question, class:'control-label' %>
+                  <%= f.bootsy_area :discussion_question, class:'form-control', rows:8%>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :slide_number, class:'control-label' %>
+                  <%= f.number_field :slide_number, class:'form-control' %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :due_date, class:'control-label' %>
+                  <%= f.datetime_select :due_date, class:'form-control' %>
+                </div>
+
+                
+                  <%= f.hidden_field :presentation_id, value: @presentation.id %>
+                
+
+
+                <div class="form-group" id='controls'>
+                  <%= f.submit "Save", class: 'btn btn-primary' %> 
+                </div>
+
+              <% end %>
+
+<% end %>
+
+<% else %> 
+  <h1> Only Admins can view this page </h1> 
+<% end %> 

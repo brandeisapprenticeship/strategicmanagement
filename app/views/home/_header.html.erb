@@ -1,0 +1,39 @@
+
+
+<nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to Setting.site_title, root_path, class: 'navbar-brand' %>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        	<% if user_signed_in? %>
+          <ul class="nav navbar-nav">
+            <li > <%= link_to 'Home', root_path  %> </li >
+			<li > <%= link_to 'Presentations', presentations_path  %> </li >
+      
+			<% if current_user.admin? %>
+				<li> <%= link_to 'Portfolios', portfolios_path %> </li >
+        <%if Setting.show_settings_page %>
+				  <li> <%= link_to 'Site Settings', show_settings_path %> </li >
+        <% end %>
+			<% end %>
+      <li> <%= link_to 'About This Class', home_about_path %> </li >
+      <li > <%= link_to 'My likes', likes_path %></li >
+
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li > <%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li >
+          </ul>
+          <% end %>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+

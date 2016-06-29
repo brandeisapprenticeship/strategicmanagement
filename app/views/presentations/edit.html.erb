@@ -1,0 +1,15 @@
+<ol class='breadcrumb'>
+	<li><%= link_to "Presentations", presentations_path %></li>
+	<li><%= link_to @presentation.title, @presentation %></li>
+	<li class='active'>Edit</li>
+</ol>
+<div class='page-header'>
+	<h1>Editing Presentation</h1>
+</div>
+<div class='row'>
+	<div class='col-md-8'>
+		<%= render 'form' %>
+		<%= link_to 'Cancel', :back %>
+	</div>
+</div>
+

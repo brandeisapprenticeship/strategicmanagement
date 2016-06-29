@@ -1,0 +1,57 @@
+<% if !@response.nil? && @response.assignment.due_date< Time.zone.now %>
+<h1> The due date has passed, you can no longer edit this response. </h1>
+<h1><%=@response.title%></h1>
+<h3>By: <%=@response.user.name%></h3>
+<br>
+<div class="responsecontent">
+	<%=@response.content.html_safe%>
+</div>
+
+<% else %>
+<div class='row'>
+	<div class='col-md-6'>
+		<%= form_for(@response) do |f| %>
+		<% if @response.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
+
+			<ul>
+				<% @response.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+		<div class="field">
+			<div>
+				<%= f.hidden_field :assignment_id, value: @assignment.id%>
+			</div>
+		</div>
+
+		<div class="form-group">
+				<%= f.label :content, class:'control-label sr-only' %><br>
+				<%= f.bootsy_area :content, class:'form-control', rows:8, class:'form-control' %>
+		</div>
+
+			<%= f.hidden_field :user_id, value: @user.id%>
+			<%= f.hidden_field :user_name, value: @user.name%>
+
+
+		<div class="form-group">
+			<%= f.submit "Save", class:'btn btn-primary' %> <%= link_to "Cancel", @presentation, class: 'btn btn-link' %>
+		</div>
+		<% end %>
+	</div>
+
+
+
+
+<% unless @presentation.nil? %>
+<div class='col-md-6'>
+<iframe src="<%= @presentation.slides.url %>#page=<%= @assignment.slide_number %>" frameborder="0" class='pretty-frame' allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<% end %>
+</div>
+</div>
+
+
+<% end %>

@@ -1,0 +1,56 @@
+<ol class='breadcrumb'>
+	<li class='active'>Presentations</li>
+</ol>
+<div class='page-header'>
+	<h1>Presentations</h1>
+	
+</div>
+
+
+
+
+<div class='row'>
+	<div class='col-md-12'>
+	<% if current_user.admin %>
+		<p><%= link_to 'New Presentation', new_presentation_path, class:'btn btn-success' %></p>
+	<% end %>
+
+
+	<table class='table middle'>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Link</th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @presentations.each do |presentation| %>
+			<tr>
+
+				<td>
+					<% if presentation == Presentation.current %>
+						<b>
+					<% end %>
+					<%= presentation.title %>
+					<% if presentation == Presentation.current %>
+						 (current presentation) </b>
+					<% end %>
+				</td>
+				<td> 
+				<%= link_to 'View presentation and discussions', presentation_path(presentation), class: 'btn-padding-vertical' %>
+				</td>
+				<td>
+				<% if current_user.admin %>
+				<%= link_to fa_icon("pencil"), edit_presentation_path(presentation), class: 'btn btn-primary btn-icon', title:'Edit' %>
+				<%= link_to fa_icon("trash"), presentation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-icon', title:'Delete' %>
+				<% end %>
+				</td>
+			</tr>
+			<% end %> 
+		</tr>
+	</tbody>
+	</table>
+	</div>
+</div>

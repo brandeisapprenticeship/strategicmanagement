@@ -1,0 +1,14 @@
+# config/app.yml for rails-settings-cached
+defaults: &defaults
+  site_title: "Strategic Management"
+  about_text: "<p> HS252B is a graduate level class on strategic management intended for students pursing their MBAs or those with a strong interest in management.  Over eight sessions it covers the fundamentals of strategy formulation and then explores how leaders implement them.</p><p>This year, we are experimenting with a new system designed to deepen student learning by both enabling deeper reflection on class content and also helping the instructor be more effective reinforcing key concepts and enhancing course clarity.  We will do this by asking students to engage in brief, reflective exercises following each lecture. Each exercise should not take more than 15 to 20 minutes and will allow students to both consider their own interpretations of the course material and to examine those of their classmates. Reflecting on the material in a lecture provides positive reinforcement of key concepts and provides the instructor valuable information about the students' understanding.</p>"
+  class_name: "HS 252B"
+  show_settings_page: false
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
